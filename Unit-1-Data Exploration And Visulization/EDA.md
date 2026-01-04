@@ -92,7 +92,7 @@ The mean alone can be misleading. A dataset with a mean of 50 could have all val
 They are critical components in most advanced statistical tests, confidence intervals, and hypothesis testing, helping determine the significance and readability of results.  
 
 
-# **Define correlation. How is correlation measured, and what are the possible ranges and interpretations of correlation value?**  
+# **7. Define correlation. How is correlation measured, and what are the possible ranges and interpretations of correlation value?**  
 Ans- In statistics, correlation is a quantitative  measure that illustrates the strength and direction of a linear relationship between two variables. This measure is typically denoted as r often refered as pearson's correlation coeffecient, ranges from -1 to 1.  
 
 * r=1, perfect positive linear relationship.  
@@ -327,7 +327,6 @@ Dividing the dataset into training, validation, and testing sets to evaluate the
 
 # **14. How are various data types (like caregorical, numerical and ordinal data ) handled differently in ML model?**  
 Ans- 
-```markdown
 ## Numerical Data
 
 Numerical data (e.g., height, temperature, price) is already in a quantitative format, but it often requires **scaling or transformation** to improve model performance.
@@ -350,7 +349,7 @@ Categorical data represents **groups or labels** (e.g., colors, animal types). S
 | **Label Encoding** | Assigns a unique integer to each category (e.g., Red=1, Green=2). | Suitable only for tree-based models (Decision Trees, Random Forests). Not recommended for linear models due to artificial ordering. |
 | **Feature Hashing (Hashing Trick)** | Uses a hash function to map categories into fixed-size vectors. | Efficient for high-cardinality data and reduces memory usage. |
 
----
+
 
 ## Ordinal Data
 
@@ -361,7 +360,7 @@ Ordinal data is categorical data with a **meaningful order**, but unequal spacin
 | **Ordinal Encoding** | Assigns integers that respect order (Low=1, Medium=2, High=3). | Preserves ranking information without assuming equal distance between categories. |
 | **Target / Mean Encoding** | Replaces categories with the mean of the target variable. | Effective for ordinal and high-cardinality data but must be validated carefully to avoid data leakage. |
 
----
+
 
 ## Summary of Handling Approaches
 
@@ -370,4 +369,4 @@ Ordinal data is categorical data with a **meaningful order**, but unequal spacin
 - **Ordinal Data** → Ordered encoding to preserve rank information  
 
 > The key principle is to **preserve real relationships** while avoiding the creation of **artificial numerical meaning** that can mislead models.
-```
+
