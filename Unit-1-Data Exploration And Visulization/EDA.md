@@ -370,3 +370,238 @@ Ordinal data is categorical data with a **meaningful order**, but unequal spacin
 
 > The key principle is to **preserve real relationships** while avoiding the creation of **artificial numerical meaning** that can mislead models.
 
+# **15. What techniques are used to summarise data, and how do these summaries aid in developing an ML model?**
+Ans- Techniques used to summarize data genrerally fall under descriptive statistics, data visualization, dimensionality reduction, and sampling.
+**1. Descriptive Statistics :**  
+* Measure of Central Tendency.
+* Measure of Variability(spread).
+* Measure of Position/Distribution.
+
+**Aid to ML :**  
+These help identify **featire Scaling** needs. For instance, if a feature has a massive variance, you'll know to apply Standardization or Normalization so one variable doesn't dominate the model's loss function.
+
+**2. Data Visualization :**  
+Visual Summaries help identify patterns, outliers, and relationships that might be missed with numerical methods alone.  
+* Histograms  
+* box-plot  
+* Scatter plots  
+* heatmaps  
+
+**Aid to ML :**  
+Heatmaps reveal **multi-co;llinearity**(high correlation between features). Removing redundant features simplifies the model, reduces training time, and prevents overfitting. Box plots are essential for **outlier detection**, ensuring your model is't skewed by "noise."
+
+**3. Dimensionality Reduction :**  
+**Technique :**  
+Principal Component Analysis (PCA), t-Distributed Stochastic Neighbour Embedding (t-SNE).  
+
+**Aid to ml :**  
+These techniques compress a high number of features into a smaller set of "principal components." This combats the **Curse of Dimensionality,** making models more computationall effecient and improving generalization on new data.  
+
+**4. Data Aggregation & Sampling :**  
+**Technique :**  
+Grouping (Pivot tables) and stratified sampling.  
+
+**Aid to Ml :**  
+Aggregation helps in **feature engineering** (e.g., converting daily transaction logs into a "monthly average" feature). Stratified sampling ensures that your training and test sets have the same class distribution, which is critical for handling **imbalanced datasets.**  
+
+**5. Automated Summarization :**  
+**Techniques :**  
+Using LLMs and Pandas Profiling/YData Profiling to generate instant data health reports.  
+
+**Aid to ML :**  
+These tools provide a "birds-eye-view" of missing values and data drift, allowing you to automate the **data cleaning** pipeline before the model ever sees the data.  
+
+
+
+# **16. What are the critical statistical measures used for data analysis in ML, and why are they important?**  
+Ans-  
+**1. Measures of Central Tendency.**  
+**2. Measures of Dispersion**  
+**3. Distribution Shape(skewness, kurtosis)**
+
+**4. Correlation and p-values**  
+* **Correlation(pearson/ Spearman) :**  
+Measures the strength of relationships between variables. It is the primary tool for **feature Selection,** allowing engineers to remove redundant(highly correlated) features to prevent overfitting.  
+
+* **P-Value :**  
+Used in hypothesis testing to determine if an observed pattern is **statistically significant** or just random noise. It validates whether model improvements (e.g., in A/B testing) are genuine.
+
+**5. Probability Measures :**  
+* **Conditional Probability :**  
+The backbone of classical algorithms like **Nave Bayes** and **Logistic Regression**, where the model estimates the likelihood of an input belongong to a specoific class.  
+
+* **Distributions(Normal/ Bernouli) :**  
+Most ML algorithms rely on specific distributional assumptions (e.g., Gaussian residuals in regression) to make reliable inferences.  
+
+**6. Model Evaluation Metrics :**  
+* **MSE/ RMSE :**  
+Standard for assessing error magnitude in regression models.  
+
+* **Precicion/ Recall /F1-Score :**  
+Critical for evaluating classification models, especially on **imbalanced datasets** where simple accurac is misleading.  
+
+* **AUC-ROC :**  
+Measures a model's global ability to distinguish between classes across various thresholds.  
+
+
+# **17. How does understanding the distribution of variables, including the target variable, impact the development of Ml models?**  
+Ans- 
+**1. Impact on Model Selection and Performance :**  
+The shape of your data determines which algorithms are mathematically appropriate:  
+* **Algorithm Assuptions :**  
+Many classic models have "distributional priors." For example, **Linear Regression** assumes normally distributed residuals, and **Gaussian Naive Bayes** assumes features follow a normal distribution. Violating these can lead to biased estimates and poor generalization.  
+
+* **Handling Non-Normality :**  
+For heavily skewed or "fat-tailed" data, practicioners in 2026 often shift to robust models like **Quantile Regression** or non-parametric methods.(e.g., **Mann-Whitney U** or **Random Forests**) that do not rey on normality.  
+
+**2. Impact on the Target Variable (Label)**  
+The distribution of the target variable (the outcome you want to predict) is particularly critical:  
+* **class Imbalance :**  
+If the target is categorical and one class is rare.(e.g., fraud detection), the model may become biased toward the majority class.  
+Understanding this distribution triggers the need for techniques like **SMOTE**, cost-sensitive learning, or stratified sampling.  
+
+* **Target Transformation :**  
+In regression, if the target is skewed (like income), applying a **Log** or **Box-Cox transformation** can stabilize variance(addressing heteroscedasticity) and dramatically improve accuracy-sometimes increasing R^2 Scores from 44% to 93%.
+
+**3. Impact on Feature Engineering :**  
+* **Scaling and Normalization :**  
+Knowing the range and spread helps you decide between **z-score standardization** (for normalo-ish data) and **Min-Max Scaling**(for uniformly distributed features).  
+
+* **Outlier Detection :**  
+Distribution help identify extreme values that might be noise. While some models (like SVMs) are robust to outliers, others (like linear Regression) are highly sensitive, requiring either removal or capping (winsorization).  
+
+**4. Impact on Production and Monitoring (2026 Standards)**  
+* **Detecting Data Drift :**  
+Monitoring distribution changes in production is essential. A shift in feature distribution (**Covariance Shift**) or the relationship between inputs and targets (**concept drift**) is a leading cause of model performance degradation.  
+
+* **Feedback Proxy :**  
+When true labels are delayed (e.g., long-term loan defaults), monitoring input distribution shifts as a "proxy signal" to alert engineers that the might no longer be reliable.  
+
+
+# **18. How are correlation and covariance analysed in the context of ML, and what insights do they provide about the data?**  
+Ans- 
+**Correlation for boston housing dataset :**  
+correlation_matrix = boston_df.corr().round(2)
+sns.heatmap(data=correlation_matrix, annot=True)
+plt.show()
+
+**Covariance for Boston Housing dataset :**  
+covariance_matrix = boston_df.cov()
+sns.heatmap(data=covariance_matrix, annot=True)
+plt.show()  
+
+
+# **What are common data transformation techniques in ML, and when are they typically used?**
+Ans-  
+|    Technique         |      why(purpose)     |         When(use case)   |
+|----------------------|-----------------------|--------------------------|
+|**Scaling & Normalisation**|Prevents fetures with larger magnitudes from domination the model's learning process.| When features have different units(e.g., age vs. salary) and you are using distance-based (KNN, SVM) or gradient-based (Neural Networks) models.|  
+|**Categorical Encoding**| converts non-numeric labels (text) into numbers so the model can perform backend math. | When your dataset contains qualitative data like "city", "Gender", or "Educational Level".|
+|**IMputation**| Preserves dataset size and integrity by filling gaps rather than deleting rows, which can introduce bias.| When you have "NAN" or blank cells due to sensor failures, human error, or survey drop-outs.|  
+|**Log Transformation**| Compress a wide range of values and stabilizes variance.| When data is **right-skewed**(e.g., income, house prices) or shows exponential growth patterns.|  
+|**Feture Engineering**| Uncovers "hidden" relationships and improves predictive power by creating more representative attributes| when raw data doesn't directly capture the underlying pattern(e.g., calculating "Area" from "Length" and "width").|  
+|**Outlier Handling**| Restricts the impact of extreme values that can skew training and causes poor generalization. | When visual tools(box plots) reveal data points far outside the normal range that might be "noise."|
+
+**Strategic Consideration for 2026 :**  
+* **Algorithmic Sensitivity :**  
+Linear models and Neural Networks are highly sensitive to scale and distribution, requiring rigorous scaling and normalization. Tree-based models (Random Forests, XGBoost) are more robust and often don't require scaling.  
+
+* **Missingness Mechanisms :**  
+The choice of **when** to impute depends on how data went missing. Truly random gaps (MCAR) can be filled with simple means, while systematic gaps (MNAR) may require advanced models like Autoencoders or domain-specific knowledge to avoid introducing bias.  
+
+* **Encoding Choice :**  
+Use **One-Hot Encoding** for nominal data with no order (e.g., colors) to avoid implying an artificial hierarchy. Use **Ordinal Encoding** for data with a clear rank (e.g., "Low", "Medium", "High").
+
+
+# **20. How can pivot tables be used effectively in the data analysis phase of ML?**  
+Ans-  
+**1. Data Quality and Health Checks :**  
+* **Missing Value Detection :**  
+Pivot tables can quicky count entries across categories to identify sparse data regions or highly concentrations of null values.  
+
+* **Duplicate and Inconsistency Checks :**  
+By summarizing unique identifiers against counts, analysts can spot unexpected duplicates or inconsistent categorical labels. (e.g., "NY" vs. "New York").  
+
+**2. Feature Engineering Insights :**  
+* **Aggregated Feture Creation :**  
+Analysts use pivot tables to test the predictive power of aggregated metrics, such as a customer's **average transaction value** or **total monthly spend**, before codyfying these as new features in an ML pipeline.  
+
+* **Categorical Interaction Analysis :**  
+By placing two categorical variables in the rows and columns,, pivot tables reveal hidden interactions and correlations that might warrant more complex model architectures.  
+
+**3. Hyperparameter and Model Performance Analysis :**  
+* **Grid Search Visualization :**  
+After running multiple model iterations, pivot tables are often used to map **hyperparameters**(e.g., learning rate vs. tree depth) against performance metrics like accuracy or F1-score to identify the "sweet spot" for optimization.  
+
+* **Error Distribution Analysis :**  
+Pivot tables help segment modes errors by demographic or temporal features(e.g., month, region) to determine if a model is biased against specific data subsets.  
+
+**4. Target Variable Exploration :**  
+* **Class Imbalance Assessment :**  
+In classification tasks, a pivot table provides an immediate view of the **distribution of target classes** across various independent variables, highlighting the need for sampling techniques like SMOTE.  
+
+* **Relationship Mapping :**  
+Analysts use themm to find ratios-such as "Discount Per Unit Sold" - to determine if these derived metrics have a stronger correlation with the target variable than raw data points.  
+
+**5. Automated Analysis (The 2026 Edge) :**  
+* **AI-Assisted Summarization :**  
+Modern tools like Microsoft copilot in Excel can now automatically suggest pivot tables structures to highlight the most relevant patterns for an ML task.  
+
+* **Live Data Monitoring :**  
+Connected to external sources via Power Query, pivot tables can serve as real-time "dashboard" to monitor data drift and model health in production.  
+
+
+# **21. What are the effective strategies for dealing with missing data during the preprocessing stage in ML?**  
+Ans-  
+**1. Data Removal (Deletion) :**  
+* **List-wise/Row Deletion :**  
+Removing entire rows with missing values.  
+->**Best For:** MCAR data where the missing portion is very small (typically <3%) and the remaining dataset is large enough to retain statistical power.  
+
+**Column Deletion :**  
+Removing an entire feature if more than 60-80% of its values are missing, provided it isn't critical for prediction.  
+  
+**2. Simple Statistical Imputation :**  
+* **Mean/Median Imputation :**  
+Replacing numerical gaps with the column's mean or median. Median is preferred for skewed data to avoid outlier bias.  
+  
+* **Mode Imputation :**  
+Replacing categorical gaps with the most frequent value.  
+  
+* **Constant/Zero Imputation :**  
+Filling with a specific value (e.g., "0" for missing sales if it implies no sales occurred).  
+  
+**3. Advanced Machine Learning Imputation :**  
+  * **K-Nearest Neighbours (KNN):**  
+  Finds the "**k**" most similar records and fills the gap using their average or most frequent value. It is resilient to outliers and works well for MAR data.  
+  
+  * **MICE(Multiple Imputation by Chained Equations) :**  
+  A sophisticated technique that uses regression models to predict missing values iteratively. It is considered one of the most accurate methods as it accounts for relationships between all features.  
+  
+  * **MissForest :**  
+   Uses Random Forests to iteratively impute values. It is highly effective for complex, non-linear datasets with mixed data types.  
+  
+**4. Specialized Techniques :**  
+   * **Interpolation :**  
+   Useful for time-series data where values change gradually (e.g., temperatures or stock prices) by estimating values based on trends between surrounding points.  
+     
+   * **Forward/Backward Fill :**  
+   Propagates the last lnown or next known value into the gap; also best suited for time-series data.  
+
+   * **Missing Indicator :**  
+   Creating a new binary feature (e.g., is_missing_age) to flag that data was absent. This is critical for MNAR data, where the absence itself is a predictive signal.  
+
+
+# **22. What methods are used to transform categorical data in various ML algorithms, and why is this transformation necessary ?**  
+Ans-  because
+**1. Algorithm Comapatibility :**  
+Most models cannot interpret text labels or raw categories. They need numeric values to calculate coefficients and optimize internal parameters.  
+  
+**2. Performance and Accuracy :**  
+Proper Encoding helps models capture relationships and nuances without making false assumptions, such as an artificial ranking in nominal data.  
+  
+**3. Mathematical Optimization :**  
+Distance-based algorithms (like k-NN or SVM) use numerical differences to measure similarity; without encoding, these calculations are impossible.  
+  
+**4. Feature Importance :**  
+Encoded variables allow the model to weight each individual category separately, which is critical for identifying which fetures most significantly impact the prediction. 
