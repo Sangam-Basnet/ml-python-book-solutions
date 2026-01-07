@@ -491,7 +491,7 @@ sns.heatmap(data=covariance_matrix, annot=True)
 plt.show()  
 
 
-# **What are common data transformation techniques in ML, and when are they typically used?**
+# **19. What are common data transformation techniques in ML, and when are they typically used?**
 Ans-  
 |    Technique         |      why(purpose)     |         When(use case)   |
 |----------------------|-----------------------|--------------------------|
