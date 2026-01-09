@@ -605,3 +605,6 @@ Distance-based algorithms (like k-NN or SVM) use numerical differences to measur
   
 **4. Feature Importance :**  
 Encoded variables allow the model to weight each individual category separately, which is critical for identifying which fetures most significantly impact the prediction. 
+
+
+**with these all the quesions all the topics of EDA has been completed and with the compketion of the theory i will try to use them in tasks and projects as much as possible**
